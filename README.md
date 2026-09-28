@@ -1,13 +1,44 @@
-<img width="1030" height="167" alt="image" src="https://github.com/user-attachments/assets/143585b9-f7d5-4819-ba7e-a2c9bc180bf5" />
+c/c++ headers for common command-line program operations such as clearing the terminal, sleeping the program, manipulating the terminal cursor, output with a typewriting effect, and reading terminal input without needing to click enter/return.
 
-a c++ header file that helps in making command-line programs (mostly just sleep functions for now)
+# supported platforms
 
-there's also a clear function for clearing the console:
+posix operating systems:
+- linux
+- macos
+- windows with posix environment (e.g. wsl)
+- some others
 
-<img width="425" height="48" alt="image" src="https://github.com/user-attachments/assets/ef58de6c-29e1-44bc-8804-563a481c8695" />
+# functions
 
-and drawing characters at specific positions on the terminal:
+below is a list of every function contained in the headers, along with brief descriptions, organized by type of operation. do note that these are from the c++ header, and that the c header may lag behind in updates.
 
-<img width="606" height="42" alt="image" src="https://github.com/user-attachments/assets/f3c32102-01e7-4db5-a58d-378219fc25f9" />
+## output functions
 
-^ this draws `@` 5 lines down, 5 spaces to the right
+`void clear()` clears the terminal
+
+`void draw(char glyph, unsigned int x, unsigned int y)` writes a character on the specified coords
+
+`void to(unsigned int x, unsigned int y)` simply jumps the cursor to the specified coords
+
+`void type(std::string_view text, char end = '\n', unsigned delay_ms = 40)` output with typewriter effect
+> `void type(std::string_view text, unsigned delay_ms = 40, char end = '\n')` is an overload for the above function where the `delay_ms` parameter comes before the `end` parameter. this allows specifying the delay without needing to specify the end character
+
+## input functions
+
+`std::optional<char> key()` gets character input without requiring the user to press enter. designed for command-line games
+
+## sleep functions
+
+these functions halt the program for a specified amount of time, ordered by descending units of time
+
+`void hibernate(unsigned int hours)`
+
+`void slumber(unsigned int minutes)`
+
+`void sleep(unsigned int seconds)`
+
+`void snooze(unsigned int milliseconds)`
+
+`void doze(unsigned int microseconds)`
+
+`void wink(unsigned int nanoseconds)`
